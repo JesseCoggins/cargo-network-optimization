@@ -33,5 +33,11 @@ Minimize total shipping cost across the network.
 - `notebooks/optimization.ipynb`
 - `requirements.txt`
 
+## Selected Visuals
+
+![Optimization report visual 1](assets/report-extracts/report_image_01.png)
+
+![Optimization report visual 2](assets/report-extracts/report_image_02.png)
+
 ## Note
 The publish-only staging copy keeps the notebook and leaves the original report documents out of this GitHub set.
