@@ -1,49 +1,33 @@
-# Cargo Network Optimization with PuLP
+# Cargo network optimization with PuLP
 
-## Overview
-This project formulates and solves a linear programming model for a cargo shipping network. The objective is to minimize total shipping cost while routing freight from hub airports through focus cities to downstream demand centers under capacity, demand, and flow-balance constraints.
+I built a linear program to decide how much freight to send directly from two hubs and how much to route through intermediate cities. The lowest-cost feasible plan served **65 demand centers for $200,863.75** under the supplied lane costs and capacities. Dispatch planners can use that result as a baseline when a hub’s capacity or a lane’s price changes.
 
-## Academic Context
-Completed during my M.S. in Data Analytics at Western Governors University (WGU), then packaged here as a reproducible public portfolio project. Screenshots from the original written submission are preserved in `assets/report-extracts/`.
-
-## Business Problem
-How should cargo be routed across a multi-node network so that all destination demand is satisfied at minimum cost without exceeding hub or focus-city capacity?
-
-## Optimization Formulation
-### Objective
-Minimize total shipping cost across the network.
-
-### Constraints
-- hub capacity constraints
-- focus-city processing capacity constraints
-- demand satisfaction at every center
-- flow balance at each focus city
-- non-negativity on all shipment variables
-
-## Tools
-- Python
-- PuLP
-- CBC solver
+[Open the optimization notebook](notebooks/optimization.ipynb) · [Inspect the original report figures](assets/report-extracts/)
 
 ## Results
-- total minimum cost: `$200,863.75`
-- solver status: `Optimal`
-- CVG was fully utilized at `95,650` tons, while AFW carried `38,097` of `44,350` available tons
-- all saved verification outputs in the notebook show hub, focus-city, demand, and flow-balance constraints satisfied
 
-## Included Files
-- `notebooks/optimization.ipynb`
-- `requirements.txt`
+| Routing decision | Optimal shipment plan |
+|---|---:|
+| Total demand satisfied | 133,747 tons |
+| Shipped directly to demand centers | 87,502 tons |
+| Shipped through intermediate cities | 46,245 tons |
+| Capacity used at CVG | 95,650 of 95,650 tons |
+| Capacity used at AFW | 38,097 of 44,350 tons |
 
-## Selected Visuals
+CVG reached its capacity limit while AFW had **6,253 tons available**. A planner evaluating a capacity increase at CVG could rerun the model and compare the change in cost with the price of adding capacity. The dollar figure above is the modeled cost of the shipment plan. Measuring savings would also require a comparison plan.
 
-![Optimization report visual 1](assets/report-extracts/report_image_01.png)
+## How the model works
 
-![Optimization report visual 2](assets/report-extracts/report_image_02.png)
+- **Decision variables** represent nonnegative tons on hub-to-center, hub-to-intermediate-city and intermediate-city-to-center lanes.
+- **Objective** minimizes the sum of tons shipped on each lane multiplied by its unit cost.
+- **Constraints** enforce hub capacity, processing limits at intermediate cities, balanced inbound and outbound flow, and demand at each destination.
 
-## Note
-The notebook contains the full LP formulation, embedded demand and lane-cost tables from the original coursework notebook, the solver call, and constraint verification logic. It can be rerun end-to-end to reproduce the `$200,863.75` optimal cost, CVG full utilization, and AFW usage of `38,097` out of `44,350` tons.
+I used Python and PuLP to express 331 variables and 73 constraints. The CBC solver returned an optimal solution using 67 lanes. The notebook checks every demand center, validates flow and capacity, and confirms that the solution uses no penalty-cost lanes.
 
-## A separate trucking case study
+## Reproduce the solution
 
-The [ABC Logistics fleet-routing proposal](docs/abc-logistics-routing.md) explains how customer time windows, driver hours and emissions change the decision when dispatchers assign individual trucks to routes.
+Install the [Python dependencies](requirements.txt) in a Jupyter environment with the CBC solver available to PuLP, then run the notebook from the first cell. It contains the demand and lane-cost tables and prints the shipment plan and verification results.
+
+The separate [ABC Logistics fleet-routing proposal](docs/abc-logistics-routing.md) shows how the formulation changes when dispatchers must also assign trucks, meet delivery windows and respect driver-hour limits.
+
+*WGU M.S. in Data Analytics coursework, D605 Optimization.*
