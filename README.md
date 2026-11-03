@@ -43,3 +43,7 @@ Minimize total shipping cost across the network.
 
 ## Note
 The notebook contains the full LP formulation, embedded demand and lane-cost tables from the original coursework notebook, the solver call, and constraint verification logic. It can be rerun end-to-end to reproduce the `$200,863.75` optimal cost, CVG full utilization, and AFW usage of `38,097` out of `44,350` tons.
+
+## A separate trucking case study
+
+The [ABC Logistics fleet-routing proposal](docs/abc-logistics-routing.md) explains how customer time windows, driver hours and emissions change the decision when dispatchers assign individual trucks to routes.
