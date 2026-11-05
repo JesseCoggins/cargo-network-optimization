@@ -1,6 +1,8 @@
 # Validation environment and scope
 # Full notebook executed on Python 3.13.1 with CBC bundled by PuLP. Reproduced optimal cost
 # 200863.75, 331 decision variables and 73 constraints.
+# Evaluation charts were generated with the Matplotlib version listed below.
 # Direct package versions used for these checks:
 pandas==2.2.3
 pulp==3.3.0
+matplotlib==3.10.0

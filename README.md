@@ -2,6 +2,10 @@
 
 I built a linear program to decide how much freight to send directly from two hubs and how much to route through intermediate cities. The lowest-cost feasible plan served **65 demand centers for $200,863.75** under the supplied lane costs and capacities. Dispatch planners can use that result as a baseline when a hub’s capacity or a lane’s price changes.
 
+![Hub capacity use and direct versus transfer shipments in the optimal cargo plan](assets/optimal-shipping-plan.png)
+
+*Hub capacity use and shipment quantities in the solved plan.*
+
 [Open the optimization notebook](notebooks/optimization.ipynb) · [Inspect figures from the project report](assets/report-extracts/)
 
 ## Results
