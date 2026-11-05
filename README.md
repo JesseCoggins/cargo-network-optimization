@@ -14,7 +14,7 @@ I built a linear program to decide how much freight to send directly from two hu
 | Capacity used at CVG | 95,650 of 95,650 tons |
 | Capacity used at AFW | 38,097 of 44,350 tons |
 
-CVG reached its capacity limit while AFW had **6,253 tons available**. A planner evaluating a capacity increase at CVG could rerun the model and compare the change in cost with the price of adding capacity. The dollar figure above is the modeled cost of the shipment plan. Measuring savings would also require a comparison plan.
+CVG reached its capacity limit while AFW had **6,253 tons available**. A planner evaluating a capacity increase at CVG could rerun the model and compare the change in cost with the price of adding capacity. I calculated the cost of this shipment plan. I did not compare it with an existing plan, so I have not measured savings.
 
 ## Network terms
 
@@ -35,7 +35,7 @@ CVG reached its capacity limit while AFW had **6,253 tons available**. A planner
 
 I used Python and PuLP to express 331 variables and 73 constraints. The CBC solver returned an optimal solution using 67 lanes. The notebook checks every demand center, validates flow and capacity, and confirms that the solution uses no penalty-cost lanes.
 
-## Reproduce the solution
+## Run it yourself
 
 Install the [Python dependencies](requirements.txt) in a Jupyter environment with the CBC solver available to PuLP, then run the notebook from the first cell. It contains the demand and lane-cost tables and prints the shipment plan and verification results.
 
