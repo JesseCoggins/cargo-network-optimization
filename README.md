@@ -2,7 +2,7 @@
 
 I built a linear program to decide how much freight to send directly from two hubs and how much to route through intermediate cities. The lowest-cost feasible plan served **65 demand centers for $200,863.75** under the supplied lane costs and capacities. Dispatch planners can use that result as a baseline when a hub’s capacity or a lane’s price changes.
 
-[Open the optimization notebook](notebooks/optimization.ipynb) · [Inspect the original report figures](assets/report-extracts/)
+[Open the optimization notebook](notebooks/optimization.ipynb) · [Inspect figures from the project report](assets/report-extracts/)
 
 ## Results
 
@@ -43,6 +43,7 @@ The separate [ABC Logistics fleet-routing proposal](docs/abc-logistics-routing.m
 
 ## Data and environment
 
-[Data origin and reuse notes](data/README.md). Install [requirements.txt](requirements.txt), which includes [the checked direct package versions](requirements-verified.txt). The full notebook was rerun on Python 3.13.1 with the pinned direct dependencies, reproducing the optimal cost of $200,863.75 (331 variables, 73 constraints). These are direct dependency pins, not a complete transitive lockfile.
+Data: WGU cargo-routing scenario; [input tables and units](data/README.md).  
+Install: `python -m pip install -r requirements.txt`; [environment details](requirements-verified.txt).
 
 *WGU M.S. in Data Analytics coursework, D605 Optimization.*
