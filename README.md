@@ -16,6 +16,17 @@ I built a linear program to decide how much freight to send directly from two hu
 
 CVG reached its capacity limit while AFW had **6,253 tons available**. A planner evaluating a capacity increase at CVG could rerun the model and compare the change in cost with the price of adding capacity. The dollar figure above is the modeled cost of the shipment plan. Measuring savings would also require a comparison plan.
 
+## Network terms
+
+| Term | Meaning in this model |
+|---|---|
+| Hub | An origin with a limit on total outbound tons |
+| CVG / AFW | The two hub identifiers used in the supplied scenario |
+| Intermediate / focus city | A transfer point with balanced inbound/outbound flow and a processing limit |
+| Demand center | A destination with a required tonnage |
+| Lane / unit cost | A directed route and its cost per ton |
+| Penalty-cost lane | A missing route assigned a high fallback cost; the solution uses none |
+
 ## How the model works
 
 - **Decision variables** represent nonnegative tons on hub-to-center, hub-to-intermediate-city and intermediate-city-to-center lanes.
@@ -29,5 +40,9 @@ I used Python and PuLP to express 331 variables and 73 constraints. The CBC solv
 Install the [Python dependencies](requirements.txt) in a Jupyter environment with the CBC solver available to PuLP, then run the notebook from the first cell. It contains the demand and lane-cost tables and prints the shipment plan and verification results.
 
 The separate [ABC Logistics fleet-routing proposal](docs/abc-logistics-routing.md) shows how the formulation changes when dispatchers must also assign trucks, meet delivery windows and respect driver-hour limits.
+
+## Data and environment
+
+[Data origin and reuse notes](data/README.md). Install [requirements.txt](requirements.txt), which includes [the checked direct package versions](requirements-verified.txt). The full notebook was rerun on Python 3.13.1 with the pinned direct dependencies, reproducing the optimal cost of $200,863.75 (331 variables, 73 constraints). These are direct dependency pins, not a complete transitive lockfile.
 
 *WGU M.S. in Data Analytics coursework, D605 Optimization.*
